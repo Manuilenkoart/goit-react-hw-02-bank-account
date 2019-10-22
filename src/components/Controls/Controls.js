@@ -1,35 +1,45 @@
-import React, { Component } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import styles from "./Controls.module.css";
+import React, { Component } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import T from 'prop-types';
+import styles from './Controls.module.css';
 
 export default class Controls extends Component {
+  static propTypes = {
+    onSaveDeposit: T.func.isRequired,
+    onSaveWithdraw: T.func.isRequired,
+  };
+
   state = {
-    inputValue: ""
+    inputValue: '',
   };
 
   handleChange = e => {
-    let inputToNumber = Number(e.target.value);
-    if (isNaN(inputToNumber)) {
-      toast.warning("Введите сумму для проведения операции!");
+    const inputToNumber = Number(e.target.value);
+    if (Number.isNaN(inputToNumber)) {
+      toast.warning('Введите сумму для проведения операции!');
       return;
     }
 
     this.setState({ inputValue: inputToNumber });
   };
-  handleDeposit = e => {
+
+  handleDeposit = () => {
     this.props.onSaveDeposit(this.state.inputValue);
     this.reset();
   };
-  handleWithdraw = e => {
+
+  handleWithdraw = () => {
     this.props.onSaveWithdraw(this.state.inputValue);
     this.reset();
   };
+
   reset = () => {
     this.setState({
-      inputValue: ""
+      inputValue: '',
     });
   };
+
   render() {
     const { inputValue } = this.state;
 

@@ -1,5 +1,7 @@
-import React from "react";
-import styles from "./TransactionHistory.module.css";
+import React from 'react';
+import T from 'prop-types';
+import styles from './TransactionHistory.module.css';
+
 const TransactionHistory = ({ items }) => {
   return (
     <table className={styles.history}>
@@ -21,5 +23,15 @@ const TransactionHistory = ({ items }) => {
       </tbody>
     </table>
   );
+};
+TransactionHistory.propTypes = {
+  items: T.arryOf(
+    T.shape({
+      id: T.number.isRequired,
+      type: T.string.isRequired,
+      amount: T.number.isRequired,
+      date: T.string.isRequired,
+    }).isRequired,
+  ).isRequired,
 };
 export default TransactionHistory;

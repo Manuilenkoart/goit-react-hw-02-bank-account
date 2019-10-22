@@ -1,5 +1,7 @@
-import React from "react";
-import styles from "./Balance.module.css";
+import React from 'react';
+import T from 'prop-types';
+import styles from './Balance.module.css';
+
 const Balance = ({ income, expenses, balance }) => (
   <section className={styles.balance}>
     <span className={styles.container}>
@@ -19,4 +21,9 @@ const Balance = ({ income, expenses, balance }) => (
   </section>
 );
 
+Balance.propTypes = {
+  income: T.string.isRequired,
+  expenses: T.string.isRequired,
+  balance: T.string.isRequired,
+};
 export default Balance;
