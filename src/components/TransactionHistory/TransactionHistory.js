@@ -25,9 +25,9 @@ const TransactionHistory = ({ items }) => {
   );
 };
 TransactionHistory.propTypes = {
-  items: T.arryOf(
+  items: T.arrayOf(
     T.shape({
-      id: T.number.isRequired,
+      id: T.string.isRequired,
       type: T.string.isRequired,
       amount: T.number.isRequired,
       date: T.string.isRequired,

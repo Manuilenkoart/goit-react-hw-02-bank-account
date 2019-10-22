@@ -22,8 +22,8 @@ const Balance = ({ income, expenses, balance }) => (
 );
 
 Balance.propTypes = {
-  income: T.string.isRequired,
-  expenses: T.string.isRequired,
-  balance: T.string.isRequired,
+  income: T.number.isRequired,
+  expenses: T.number.isRequired,
+  balance: T.number.isRequired,
 };
 export default Balance;
