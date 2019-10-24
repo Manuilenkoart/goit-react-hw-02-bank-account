@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Controls from '../Controls/Controls';
 import Balance from '../Balance/Balance';
 import TransactionHistory from '../TransactionHistory/TransactionHistory';
+import storage from '../services/localStorage';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './Dashboard.module.css';
 
@@ -12,6 +13,27 @@ export default class Dashboard extends Component {
     transactions: [],
     balance: 0.0,
   };
+
+  componentDidMount() {
+    const transactions = storage.get('transactions');
+    const balance = storage.get('balance');
+
+    if (transactions && balance >= 0) {
+      this.setState({ transactions, balance });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { transactions, balance } = this.state;
+
+    if (
+      prevState.transactions !== transactions &&
+      prevState.balance !== balance
+    ) {
+      storage.save('transactions', transactions);
+      storage.save('balance', balance);
+    }
+  }
 
   saveTransactionDeposit = amount => {
     if (!amount) {
